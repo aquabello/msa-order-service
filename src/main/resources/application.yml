@@ -4,6 +4,29 @@ server:
 spring:
   application:
     name: order-service
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mariadb://localhost:3306/test
+    username: test
+    password: test
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        use_sql_comments: false
+
+# Log
+logging:
+  level:
+    com.today25.orderserivce: DEBUG # log4j 로그 개발서버는: debug, 운영은: info
+    org.springframework: error
+    org.hibernate.SQL: debug
+    org.apache.coyote.http11: debug # HTTP PRINT
 
 eureka:
   instance:
@@ -12,4 +35,5 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://192.168.123.123:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+
